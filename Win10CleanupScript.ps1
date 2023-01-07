@@ -20,10 +20,6 @@ Write-Host "Feedback Hub"
 Get-AppxPackage "*Microsoft.GetHelp*" | Remove-AppxPackage
 Write-Host "Get Help"
 
-# Get Office
-Get-AppxPackage "*Microsoft.MicrosoftOfficeHub*" | Remove-AppxPackage
-Write-Host "Office"
-
 # Groove Music
 Get-AppxPackage "*Microsoft.ZuneMusic*" | Remove-AppxPackage
 Write-Host "Groove Music"
@@ -47,6 +43,10 @@ Write-Host "Mixed Reality Portal"
 # Movies & TV
 Get-AppxPackage "*Microsoft.ZuneVideo*" | Remove-AppxPackage
 Write-Host "Movies & TV"
+
+# Office
+Get-AppxPackage "*Microsoft.MicrosoftOfficeHub*" | Remove-AppxPackage
+Write-Host "Office"
 
 # OneNote
 Get-AppxPackage "*Microsoft.Office.OneNote*" | Remove-AppxPackage
@@ -107,9 +107,11 @@ if ($xboxConfirmation -eq 'y') {
 
 # OneDrive
 $onedriveConfirmation = Read-Host "Would you like to uninstall OneDrive? (y/n)"
-ps onedrive | Stop-Process -Force
-start-process "$env:windir\SysWOW64\OneDriveSetup.exe" "/uninstall"
-Write-Host "OneNote"
+if (onedriveConfirmation -eq 'y') {
+    ps onedrive | Stop-Process -Force
+    start-process "$env:windir\SysWOW64\OneDriveSetup.exe" "/uninstall"
+    Write-Host "OneNote"
+}
 
 
 ## Photos
