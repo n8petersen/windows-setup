@@ -107,7 +107,7 @@ if ($xboxConfirmation -eq 'y') {
 
 # OneDrive
 $onedriveConfirmation = Read-Host "Would you like to uninstall OneDrive? (y/n)"
-if (onedriveConfirmation -eq 'y') {
+if ($onedriveConfirmation -eq 'y') {
     ps onedrive | Stop-Process -Force
     start-process "$env:windir\SysWOW64\OneDriveSetup.exe" "/uninstall"
     Write-Host "OneNote"
