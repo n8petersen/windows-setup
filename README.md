@@ -6,12 +6,12 @@ Hopefully in the nearby future, I will get this script digitally signed, however
 
 ---
 # Application Install Script
-*Note: This script should be run from an elevated (administrator) Powershell session.*
+*Note: This script should be run from an elevated (administrator) Powershell session.*  
 This script first installs Chocolatey, and then installs a preconfigured list of applications through Chocolatey. It uses the list from programs.txt, so you can remove or add your own programs from my list, they just have to be the [package name from chocolatey](https://community.chocolatey.org/packages).
 
 ---
 # Windows Cleanup Script
-*Note: This script should be run from an elevated (administrator) Powershell session.*
+*Note: This script should be run from an elevated (administrator) Powershell session.*  
 Windows 10/11 Powershell Script that uninstalls all the bloatware that comes with Windows 10 that nobody uses or wants. It will ask for confirmation about some that MIGHT provide use (Calculator, Camera, etc.) but otherwise uninstalls the rest.
 
 Here is an example of what the Start Menu looks like with stock Windows:  
