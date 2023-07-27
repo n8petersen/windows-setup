@@ -14,10 +14,6 @@ This script first installs Chocolatey, and then installs a preconfigured list of
 *Note: This script should be run from an elevated (administrator) Powershell session.*  
 Windows 10/11 Powershell Script that uninstalls all the bloatware that comes with Windows 10 that nobody uses or wants. It will ask for confirmation about some that MIGHT provide use (Calculator, Camera, etc.) but otherwise uninstalls the rest.
 
-Here is an example of what the Start Menu looks like with stock Windows:  
-![Windows before script](./Images/before.png)
-
-
-And here is what it looks like after the script is ran:  
+On the left is an example of what the Start Menu looks like with stock Windows, and on the right is what it looks like after the script is ran.
 (note that I chose to keep Snip & Sketch, Photos, and Xbox, which can all be optionally uninstalled in the script)  
-![Windows before script](./Images/after.png)
+![Windows before script](./Images/before-after.png)
