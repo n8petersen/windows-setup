@@ -1,4 +1,15 @@
-﻿$Remove = (
+﻿# Checking if current running as administrator
+$currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
+$isAdmin = $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+
+if (!$isAdmin) {
+    Write-Host "Please re-run in an elevated (administrator) shell."
+    Exit
+}
+
+
+
+$Remove = (
     ("Microsoft.Microsoft3DViewer", "3D Viewer"),
     ("Microsoft.WindowsAlarms", "Alarms"),
     ("Microsoft.549981C3F5F10", "Cortana"),
