@@ -21,7 +21,7 @@ else {
     # Parse programs.txt into array, and install
     Write-Host "--== Installing Programs ==--"
     Write-Host "--------------------------"
-    [string[]]$appArray = Get-Content -Path './programs.txt'
+    [string[]]$appArray = Get-Content -Path './InstallPrograms.txt'
     foreach ($app in $appArray) {
         # Write-Host "choco install $app -y"
         choco install $app -y
@@ -32,7 +32,7 @@ else {
     if ($installGames -eq 'y' -Or $installGames -eq 'Y') {
         Write-Host "--== Installing Games ==--"
         Write-Host "--------------------------"
-        [string[]]$gamesArray = Get-Content -Path './games.txt'
+        [string[]]$gamesArray = Get-Content -Path './InstallGames.txt'
         foreach ($game in $gamesArray) {
             # Write-Host "choco install $game -y"
             choco install $game -y
