@@ -126,7 +126,7 @@ if ($xboxConfirmation -eq 'y') {
 $snipsketchConfirmation = Read-Host "Would you like to uninstall Snip & Sketch? (y/n)"
 if ($snipsketchConfirmation -eq 'y') {
     Get-AppxPackage "*Microsoft.ScreenSketch*" | Remove-AppxPackage
-    Write-Host "Sticky Notes"
+    Write-Host "Snip & Sketch"
 }
 
 
