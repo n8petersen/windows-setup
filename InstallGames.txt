@@ -1,6 +1,7 @@
-runescape
-runelite
-steam
 ea-app
 epicgameslauncher
+minecraft-launcher
+runelite
+runescape
+steam
 ubisoft-connect

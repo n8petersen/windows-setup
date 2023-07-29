@@ -1,7 +1,9 @@
 1password
 7zip
 audacity
+autodesk-fusion360
 brave
+cura-new
 curl
 discord
 docker-compose
@@ -26,6 +28,7 @@ nvm
 obs-studio
 obsidian
 onenote
+openvpn
 paint.net
 postman
 powershell-core
@@ -33,6 +36,7 @@ powertoys
 putty
 python3
 qbittorrent
+qflipper
 rufus
 slack
 spotify
