@@ -22,7 +22,6 @@
 )
 
 $Optional = (
-    # ("Microsoft.WindowsStore", "Microsoft Store"),
     ("Microsoft.WindowsCamera", "Camera"),
     ("Microsoft.WindowsCalculator", "Calculator"),
     ("Microsoft.Windows.Photos", "Photos"),
@@ -37,9 +36,7 @@ Write-Host "The following apps have been uninstalled:"
 
 # Uninstall from Remove List
 foreach ($app in $Remove) {
-    # Write-Host 'Removing' $app[0] 'by name' $app[1]
     $app_wildcards = "*" + $app[0] + "*"
-    # Write-Host $app_wildcards
     Get-AppxPackage $app_wildcards | Remove-AppxPackage
     Write-Host $app[1]
 }
@@ -48,9 +45,7 @@ foreach ($app in $Remove) {
 foreach ($app in $Optional) {
     $confirmation = Read-Host "Would you like to uninstall" $app[1] "? (y/n)"
     if ($confirmation -eq 'y' -or $confirmation -eq 'Y') {
-        # Write-Host 'Removing' $app[0] 'by name' $app[1]
         $app_wildcards = "*" + $app[0] + "*"
-        # Write-Host $app_wildcards
         Get-AppxPackage $app_wildcards | Remove-AppxPackage
         Write-Host $app[1]
     }
