@@ -46,6 +46,7 @@ tailscale
 tor-browser
 vlc
 vscode
+winscp
 wireshark
 wiztree
 wsl-ubuntu-2204
