@@ -1,3 +1,7 @@
+# You can comment out lines using '#'
+// or using '//' at the beginning of the line.
+# Blank lines will also be ignored.
+
 ea-app
 epicgameslauncher
 minecraft-launcher
