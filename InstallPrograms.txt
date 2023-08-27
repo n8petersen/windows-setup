@@ -1,4 +1,8 @@
-1password
+# You can comment out lines using '#'
+// or using '//' at the beginning of the line.
+# Blank lines will also be ignored.
+
+// 1password
 7zip
 audacity
 autodesk-fusion360
@@ -49,6 +53,6 @@ vscode
 winscp
 wireshark
 wiztree
-wsl-ubuntu-2204
-wsl2
+// wsl-ubuntu-2204
+// wsl2
 zoom
