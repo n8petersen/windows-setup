@@ -6,6 +6,6 @@ ea-app
 epicgameslauncher
 minecraft-launcher
 runelite
-runescape
+// runescape - broken package 
 steam
-ubisoft-connect
+ // ubisoft-connect - broken package
