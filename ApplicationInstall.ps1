@@ -26,7 +26,7 @@ Write-Host "--------------------------"
 foreach ($app in $appArray) {
     if ($app -notmatch '((#|\/\/).*)' -and $app -ne "") {
         Write-Host "Installing $app"
-        choco install $app -y
+        choco install $app --yes --limitoutput
     }
 }
 
@@ -39,7 +39,7 @@ if ($installGames -eq 'y' -Or $installGames -eq 'Y') {
     foreach ($game in $gamesArray) {
         if ($game -notmatch '((#|\/\/).*)' -and $game -ne "") {
             Write-Host "Installing $game"
-            choco install $game -y
+            choco install $game --yes --limitoutput
         }
     }
 }
