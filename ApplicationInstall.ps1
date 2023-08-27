@@ -20,6 +20,9 @@ else {
 }
 
 # Parse programs.txt into array, and install
+# TODO: Convert this section to install the programs using one command, each package seperated with a space
+# This should install quicker, and make any errors that occur easier to locate.
+# To do so, we need to take the listed txt, remove any commented out lines, and then make one string that gets passed to the install command.
 Write-Host "--== Installing Programs ==--"
 Write-Host "--------------------------"
 [string[]]$appArray = Get-Content -Path './InstallPrograms.txt'
