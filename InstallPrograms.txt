@@ -5,6 +5,7 @@
 // 1password - outdated package
 7zip
 audacity
+autohotkey
 // autodesk-fusion360
 // blender
 brave
