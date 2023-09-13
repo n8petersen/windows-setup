@@ -25,6 +25,7 @@ greenshot
 javaruntime
 // jre8
 microsoft-edge
+mremoteng
 nilesoft-shell
 nodejs
 // nordvpn - outdated package
