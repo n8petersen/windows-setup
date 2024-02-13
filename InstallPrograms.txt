@@ -9,9 +9,10 @@ brave
 cura-new
 curl
 discord
-docker-compose
-docker-desktop
+// docker-compose
+// docker-desktop
 firefox
+flow-launcher
 // geforce-experience
 // geforce-game-ready-driver
 git
@@ -39,14 +40,17 @@ python3
 qbittorrent
 qflipper
 rufus
+sharex
 slack
 spotify
+starship
 steelseries-engine
 sysinternals
 tailscale
 tor-browser
 vlc
 vscode
+winget
 winscp
 wireshark
 wiztree
