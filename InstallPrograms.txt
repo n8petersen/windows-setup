@@ -25,6 +25,7 @@ javaruntime
 // jre8
 microsoft-edge
 mremoteng
+modernflyouts
 nilesoft-shell
 nodejs
 notepadplusplus
@@ -32,6 +33,7 @@ nvm
 obs-studio
 obsidian
 paint.net
+// portmaster //outdated package
 postman
 powershell-core
 powertoys
