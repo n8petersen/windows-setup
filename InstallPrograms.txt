@@ -2,12 +2,9 @@
 // or using '//' at the beginning of the line.
 # Blank lines will also be ignored.
 
-// 1password - outdated package
 7zip
 audacity
 autohotkey
-// autodesk-fusion360
-// blender
 brave
 cura-new
 curl
@@ -22,20 +19,17 @@ golang
 googlechrome
 googledrive
 greenshot
+gsudo
 javaruntime
 // jre8
 microsoft-edge
 mremoteng
 nilesoft-shell
 nodejs
-// nordvpn - outdated package
 notepadplusplus
-// nvidia-display-driver
 nvm
 obs-studio
 obsidian
-// onenote - broken package
-// openvpn
 paint.net
 postman
 powershell-core
