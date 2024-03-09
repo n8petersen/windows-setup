@@ -3,9 +3,10 @@
 # Blank lines will also be ignored.
 
 7zip
-audacity
-autohotkey
-brave
+// audacity
+// autohotkey
+// brave
+coretemp
 cura-new
 curl
 discord
@@ -13,17 +14,17 @@ discord
 // docker-desktop
 firefox
 flow-launcher
-// geforce-experience
-// geforce-game-ready-driver
+geforce-experience
+geforce-game-ready-driver
 git
 golang
 googlechrome
-googledrive
+// googledrive
 greenshot
 gsudo
 javaruntime
 // jre8
-microsoft-edge
+// microsoft-edge
 mremoteng
 modernflyouts
 nilesoft-shell
@@ -40,16 +41,16 @@ powertoys
 putty
 python3
 qbittorrent
-qflipper
+// qflipper
 rufus
-sharex
+// sharex
 slack
 spotify
 starship
 steelseries-engine
 sysinternals
 tailscale
-tor-browser
+// tor-browser
 vlc
 vscode
 winget
@@ -58,4 +59,4 @@ wireshark
 wiztree
 // wsl-ubuntu-2204
 // wsl2
-zoom
+// zoom
