@@ -20,16 +20,13 @@ else {
 }
 
 # Parse programs.txt into array, and install
-# TODO: Convert this section to install the programs using one command, each package seperated with a space
-# This should install quicker, and make any errors that occur easier to locate.
-# To do so, we need to take the listed txt, remove any commented out lines, and then make one string that gets passed to the install command.
 Write-Host "--== Installing Programs ==--"
 Write-Host "--------------------------"
 [string[]]$appArray = Get-Content -Path './InstallPrograms.txt'
 foreach ($app in $appArray) {
     if ($app -notmatch '((#|\/\/).*)' -and $app -ne "") {
         Write-Host "Installing $app"
-        choco install $app --yes --limitoutput
+        choco upgrade $app -y
     }
 }
 
@@ -42,7 +39,7 @@ if ($installGames -eq 'y' -Or $installGames -eq 'Y') {
     foreach ($game in $gamesArray) {
         if ($game -notmatch '((#|\/\/).*)' -and $game -ne "") {
             Write-Host "Installing $game"
-            choco install $game --yes --limitoutput
+            choco upgrade $game -y
         }
     }
 }
