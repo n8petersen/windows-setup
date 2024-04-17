@@ -1,62 +1,65 @@
 # You can comment out lines using '#'
-// or using '//' at the beginning of the line.
+//or using '//' at the beginning of the line.
 # Blank lines will also be ignored.
 
 7zip
-// audacity
-// autohotkey
-// brave
-coretemp
+//audacity
+//autohotkey
+//brave
+cinebench
+//coretemp
 cura-new
-curl
+//curl
 discord
-// docker-compose
-// docker-desktop
-firefox
+//docker-compose
+//docker-desktop
+//firefox
 flow-launcher
 geforce-experience
-geforce-game-ready-driver
+//geforce-game-ready-driver
 git
-golang
-googlechrome
-// googledrive
+//golang
+//googlechrome
+//googledrive
 greenshot
 gsudo
-javaruntime
-// jre8
-// microsoft-edge
+//javaruntime
+//jre8
+//microsoft-edge
 mremoteng
-modernflyouts
+//modernflyouts
 nilesoft-shell
-nodejs
+//nodejs
 notepadplusplus
-nvm
+//nvm
 obs-studio
 obsidian
-paint.net
-// portmaster //outdated package
-postman
+occt
+//paint.net
+//portmaster //outdated package
+//postman
 powershell-core
 powertoys
 putty
 python3
-qbittorrent
-// qflipper
-rufus
-// sharex
-slack
+//qbittorrent
+//qflipper
+revo-uninstaller
+//rufus
+//sharex
+//slack
 spotify
 starship
 steelseries-engine
 sysinternals
 tailscale
-// tor-browser
+//tor-browser
 vlc
 vscode
 winget
-winscp
-wireshark
+//winscp
+//wireshark
 wiztree
-// wsl-ubuntu-2204
-// wsl2
-// zoom
+//wsl-ubuntu-2204
+//wsl2
+//zoom
