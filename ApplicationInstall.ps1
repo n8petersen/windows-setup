@@ -51,8 +51,10 @@ choco upgrade all -y
 
 
 # Install WSL 
-wsl --install -d ubuntu-22.04
-wsl --install -d kali-linux
+Write-Host "--== Installing WSL Distros ==--"
+Write-Host "---------------------------"
+wsl --install -d ubuntu-22.04 -n 
+wsl --install -d kali-linux -n
 
     
 Write-Host "---------------------------------"
