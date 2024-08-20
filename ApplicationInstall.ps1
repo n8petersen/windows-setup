@@ -49,9 +49,12 @@ Write-Host "--== Updating Packages ==--"
 Write-Host "---------------------------"
 choco upgrade all -y
 
+
+# Install WSL 
+wsl --install -d ubuntu-22.04
+wsl --install -d kali-linux
+
     
 Write-Host "---------------------------------"
 Write-Host "Finished installing and updating applications."
-
-
 
