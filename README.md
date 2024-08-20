@@ -4,6 +4,8 @@ If you do not feel safe changing this setting, then don't run this script. This 
 
 Hopefully in the nearby future, I will get this script digitally signed, however I built it just for personal use for the time being, but decided to publish it in case others found value.
 
+*Note: These scripts should be run in this exact order, creating a new powershell session each time.*
+
 ---
 # Application Install Script
 *Note: This script should be run from an elevated (administrator) Powershell session.*  
@@ -17,3 +19,9 @@ Windows 10/11 Powershell Script that uninstalls all the bloatware that comes wit
 On the left is an example of what the Start Menu looks like with stock Windows, and on the right is what it looks like after the script is ran.  
 *(note that I chose to keep Snip & Sketch, Photos, and Xbox, which can all be optionally uninstalled in the script)*
 ![Windows before script](./Images/before-after.png)
+
+---
+# Setup Starship Script
+*Note: This script should be run from an elevated (administrator) Powershell session.*  
+This script will setup starship for both Windows PowerShell and PowerShell core. This includes installing the needed fonts, and installing the theme file. 
+All you need to do manually is set your terminal(s) to use the new Nerd Font (CaskaydiaMono)
