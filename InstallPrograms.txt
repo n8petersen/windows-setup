@@ -19,8 +19,8 @@ googlechrome
 googledrive
 greenshot
 gsudo
-javaruntime
-jre8
+//javaruntime
+//jre8
 microsoft-edge
 mobaxterm
 //modernflyouts
