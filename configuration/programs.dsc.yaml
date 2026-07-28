@@ -352,3 +352,39 @@ resources:
   properties:
     id: "AntibodySoftware.WizTree"
     source: "winget"
+- name: winget_Anthropic.ClaudeCode
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Anthropic.ClaudeCode"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Anthropic.ClaudeCode"
+    source: "winget"
+- name: winget_Hashicorp.Terraform
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Hashicorp.Terraform"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Hashicorp.Terraform"
+    source: "winget"
+- name: winget_Kubernetes.kubectl
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Kubernetes.kubectl"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Kubernetes.kubectl"
+    source: "winget"
+- name: winget_ahmetb.kubectx
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install ahmetb.kubectx"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "ahmetb.kubectx"
+    source: "winget"
