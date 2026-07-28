@@ -9,7 +9,7 @@ Hopefully in the nearby future, I will get this script digitally signed, however
 ---
 # Application Install Script
 *Note: This script should be run from an elevated (administrator) Powershell session.*  
-This script first installs Chocolatey, and then installs a preconfigured list of applications through Chocolatey. It uses the list from programs.txt, so you can remove or add your own programs from my list, they just have to be the [package name from chocolatey](https://community.chocolatey.org/packages).
+This script installs a preconfigured list of applications through [winget](https://learn.microsoft.com/en-us/windows/package-manager/winget/) (ships with Windows 10 1809+/11 via App Installer). It uses the list from InstallPrograms.txt, so you can remove or add your own programs from my list, they just have to be a [winget package ID](https://winget.run/) (find one with `winget search <name>`).
 
 ---
 # Windows Cleanup Script

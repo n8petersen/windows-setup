@@ -7,16 +7,11 @@ if (!$isAdmin) {
     Exit
 }
 
-# Install Chocolatey
-$testchoco = Get-Command -Name choco.exe -ErrorAction SilentlyContinue
-if (-not($testchoco)) {
-    Write-Output "Seems Chocolatey is not installed, installing now."
-    Write-Host "----------------------------------------------------"
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-}
-else {
-    Write-Output "Chocolatey is already installed, skipping Chocolatey Install."
-    Write-Host "----------------------------------------------------------------------------------"
+# winget ships with Windows 10 1809+ and Windows 11 via App Installer
+$testwinget = Get-Command -Name winget.exe -ErrorAction SilentlyContinue
+if (-not($testwinget)) {
+    Write-Host "winget was not found. Install/update App Installer from the Microsoft Store, then re-run this script."
+    Exit
 }
 
 # Parse programs.txt into array, and install
@@ -26,7 +21,7 @@ Write-Host "--------------------------"
 foreach ($app in $appArray) {
     if ($app -notmatch '((#|\/\/).*)' -and $app -ne "") {
         Write-Host "Installing $app"
-        choco upgrade $app -y
+        winget install --id $app -e --source winget --accept-package-agreements --accept-source-agreements
     }
 }
 
@@ -39,24 +34,23 @@ if ($installGames -eq 'y' -Or $installGames -eq 'Y') {
     foreach ($game in $gamesArray) {
         if ($game -notmatch '((#|\/\/).*)' -and $game -ne "") {
             Write-Host "Installing $game"
-            choco upgrade $game -y
+            winget install --id $game -e --source winget --accept-package-agreements --accept-source-agreements
         }
     }
 }
 
-# Update any existing choco packages
+# Update any existing winget packages
 Write-Host "--== Updating Packages ==--"
 Write-Host "---------------------------"
-choco upgrade all -y
+winget upgrade --all --accept-package-agreements --accept-source-agreements
 
 
-# Install WSL 
+# Install WSL
 Write-Host "--== Installing WSL Distros ==--"
 Write-Host "---------------------------"
-wsl --install -d ubuntu-22.04 -n 
+wsl --install -d ubuntu-22.04 -n
 wsl --install -d kali-linux -n
 
-    
+
 Write-Host "---------------------------------"
 Write-Host "Finished installing and updating applications."
-

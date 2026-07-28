@@ -1,65 +1,66 @@
 # You can comment out lines using '#'
 //or using '//' at the beginning of the line.
 # Blank lines will also be ignored.
+# Entries are winget package IDs (find one with `winget search <name>`), not chocolatey names.
 
-7zip
-//coretemp
-//cura-new
-curl
-discord
-docker-cli
-docker-compose
-docker-desktop
-//firefox
-flow-launcher
-//geforce-experience
-git
-golang
-googlechrome
-googledrive
-greenshot
-gsudo
-//javaruntime
-//jre8
-microsoft-edge
-mobaxterm
-//modernflyouts
-//mremoteng
-neovim
-nilesoft-shell
-nodejs
-notepadplusplus
-nvm
-//obs-studio
-obsidian
-//occt
-openjdk
-//paint.net
-//postman
-powershell-core
-powertoys
-//putty
-python3
-python312
-qbittorrent
-//qflipper
-revo-uninstaller
-//rufus
-//sharex
-spotify
-starship
-steam
-//steelseries-engine
-sysinternals
-tailscale
-//tor-browser
-vivaldi
-vlc
-vscode
-winget
-winget-cli
-winscp
-//wireshark
-wiztree
-wsl2
-//zoom
+7zip.7zip
+//coretemp -> ALCPU.CoreTemp
+//cura-new -> no winget package
+//curl -> built into Windows 10 1803+ and Windows 11
+Discord.Discord
+//docker-cli -> bundled with Docker.DockerDesktop
+//docker-compose -> bundled with Docker.DockerDesktop
+Docker.DockerDesktop
+//firefox -> Mozilla.Firefox
+Flow-Launcher.Flow-Launcher
+//geforce-experience -> only on Microsoft Store, winget install --id XP8CLZL93F5Z4P -s msstore
+Git.Git
+GoLang.Go
+Google.Chrome
+Google.GoogleDrive
+Greenshot.Greenshot
+gerardog.gsudo
+//javaruntime -> Oracle.JavaRuntimeEnvironment
+//jre8 -> Oracle.JavaRuntimeEnvironment
+Microsoft.Edge
+Mobatek.MobaXterm
+//modernflyouts -> ModernFlyouts.ModernFlyouts
+//mremoteng -> mRemoteNG.mRemoteNG
+Neovim.Neovim
+Nilesoft.Shell
+OpenJS.NodeJS
+Notepad++.Notepad++
+CoreyButler.NVMforWindows
+//obs-studio -> OBSProject.OBSStudio
+Obsidian.Obsidian
+//occt -> OCBase.OCCT.Personal
+//openjdk -> vendor-specific on winget (e.g. EclipseAdoptium.Temurin.21.JDK), pick one and uncomment
+//paint.net -> dotPDN.PaintDotNet
+//postman -> Postman.Postman
+Microsoft.PowerShell
+Microsoft.PowerToys
+//putty -> PuTTY.PuTTY
+Python.Python.3.14
+Python.Python.3.12
+qBittorrent.qBittorrent
+//qflipper -> FlipperDevicesInc.qFlipper
+RevoUninstaller.RevoUninstaller
+//rufus -> Rufus.Rufus
+//sharex -> ShareX.ShareX
+Spotify.Spotify
+Starship.Starship
+Valve.Steam
+//steelseries-engine -> SteelSeries.SteelSeriesEngine
+Microsoft.Sysinternals.Suite
+Tailscale.Tailscale
+//tor-browser -> TorProject.TorBrowser
+Vivaldi.Vivaldi
+VideoLAN.VLC
+Microsoft.VisualStudioCode
+//winget -> this is winget itself, already required to run this script
+//winget-cli -> same as above
+WinSCP.WinSCP
+//wireshark -> WiresharkFoundation.Wireshark
+AntibodySoftware.WizTree
+//wsl2 -> handled separately below via `wsl --install`
+//zoom -> Zoom.Zoom

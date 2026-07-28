@@ -1,11 +1,12 @@
 # You can comment out lines using '#'
 // or using '//' at the beginning of the line.
 # Blank lines will also be ignored.
+# Entries are winget package IDs (find one with `winget search <name>`), not chocolatey names.
 
-ea-app
-epicgameslauncher
-minecraft-launcher
-runelite
-// runescape - broken package 
-steam
- // ubisoft-connect - broken package
+ElectronicArts.EADesktop
+EpicGames.EpicGamesLauncher
+Mojang.MinecraftLauncher
+RuneLite.RuneLite
+// runescape - no winget package
+Valve.Steam
+// Ubisoft.Connect - was a broken package on chocolatey; resolves fine on winget, uncomment to enable
