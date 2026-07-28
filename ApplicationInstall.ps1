@@ -14,29 +14,17 @@ if (-not($testwinget)) {
     Exit
 }
 
-# Parse programs.txt into array, and install
+# Apply the programs configuration
 Write-Host "--== Installing Programs ==--"
 Write-Host "--------------------------"
-[string[]]$appArray = Get-Content -Path './InstallPrograms.txt'
-foreach ($app in $appArray) {
-    if ($app -notmatch '((#|\/\/).*)' -and $app -ne "") {
-        Write-Host "Installing $app"
-        winget install --id $app -e --source winget --accept-package-agreements --accept-source-agreements
-    }
-}
+winget configure -f ./configuration/programs.dsc.yaml --accept-configuration-agreements --disable-interactivity
 
-# Parse games.txt into array, and install, if desired
+# Apply the games configuration, if desired
 $installGames = Read-Host "Would you like to install Game Applications? (y/n)"
 if ($installGames -eq 'y' -Or $installGames -eq 'Y') {
     Write-Host "--== Installing Games ==--"
     Write-Host "--------------------------"
-    [string[]]$gamesArray = Get-Content -Path './InstallGames.txt'
-    foreach ($game in $gamesArray) {
-        if ($game -notmatch '((#|\/\/).*)' -and $game -ne "") {
-            Write-Host "Installing $game"
-            winget install --id $game -e --source winget --accept-package-agreements --accept-source-agreements
-        }
-    }
+    winget configure -f ./configuration/games.dsc.yaml --accept-configuration-agreements --disable-interactivity
 }
 
 # Update any existing winget packages

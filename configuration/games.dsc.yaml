@@ -1,0 +1,70 @@
+# Generated with `winget configure export`, edited by hand for entries that
+# weren't installed on the export machine (winget configure export requires a
+# package to already be installed to export its resource block).
+#
+# Skipped: runescape (no winget package). ubisoft-connect was a broken
+# package on chocolatey; Ubisoft.Connect resolves fine on winget, add a
+# resource for it below if you want it.
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.3
+$schema: https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2023/08/config/document.json
+metadata:
+  winget:
+    processor:
+      identifier: "dscv3"
+resources:
+- name: winget_Microsoft.PreIndexed.Package
+  type: Microsoft.WinGet/Source
+  metadata:
+    description: "Configure winget_Microsoft.PreIndexed.Package"
+    winget:
+      securityContext: "elevated"
+  properties:
+    type: "Microsoft.PreIndexed.Package"
+    trustLevel: "trusted"
+    argument: "https://cdn.winget.microsoft.com/cache"
+    name: "winget"
+- name: winget_ElectronicArts.EADesktop
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install ElectronicArts.EADesktop"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "ElectronicArts.EADesktop"
+    source: "winget"
+- name: winget_EpicGames.EpicGamesLauncher
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install EpicGames.EpicGamesLauncher"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "EpicGames.EpicGamesLauncher"
+    source: "winget"
+- name: winget_Mojang.MinecraftLauncher
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Mojang.MinecraftLauncher"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Mojang.MinecraftLauncher"
+    source: "winget"
+- name: winget_RuneLite.RuneLite
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install RuneLite.RuneLite"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "RuneLite.RuneLite"
+    source: "winget"
+- name: winget_Valve.Steam
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Valve.Steam"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Valve.Steam"
+    source: "winget"
