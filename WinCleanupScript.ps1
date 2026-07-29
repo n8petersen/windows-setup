@@ -50,7 +50,6 @@ $RemoveAppx = (
     ("Microsoft.Ink.Handwriting", "Ink Handwriting"),
     ("MicrosoftCorporationII.QuickAssist", "Quick Assist"),
     ("Microsoft.StartExperiencesApp", "Start Experiences App"),
-    ("Microsoft.DesiredStateConfiguration", "Desired State Configuration"),
     ("Microsoft.XboxIdentityProvider", "Xbox Live")
 )
 
