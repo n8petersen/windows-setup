@@ -388,3 +388,12 @@ resources:
   properties:
     id: "ahmetb.kubectx"
     source: "winget"
+- name: winget_Derailed.k9s
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Derailed.k9s"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Derailed.k9s"
+    source: "winget"
