@@ -1,4 +1,11 @@
-﻿# Checking if current running as administrator
+﻿param(
+    # Remove all optional apps without asking. PowerShell parameter binding
+    # is case-insensitive, so both -A and -a work.
+    [Alias("a")]
+    [switch]$All
+)
+
+# Checking if current running as administrator
 $currentPrincipal = New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())
 $isAdmin = $currentPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
@@ -30,20 +37,65 @@ $RemoveAppx = (
     ("Microsoft.Getstarted", "Tips"),
     ("Microsoft.WindowsSoundRecorder", "Voice Recorder"),
     ("Clipchamp.Clipchamp", "Clipchamp"),
-    ("MicrosoftTeams", "Teams"),
+    ("MicrosoftTeams", "Teams (classic)"),
+    ("MSTeams", "Teams"),
     ("Microsoft.Todos", "Todo"),
     ("Microsoft.BingNews", "News"),
-    ("Microsoft.BingWeather", "Weather")
+    ("Microsoft.BingWeather", "Weather"),
+    ("Microsoft.Copilot", "Copilot"),
+    ("Microsoft.BingSearch", "Bing Search"),
+    ("Microsoft.OutlookForWindows", "Outlook (new)"),
+    ("Microsoft.PowerAutomateDesktop", "Power Automate"),
+    ("MicrosoftCorporationII.MicrosoftFamily", "Family Safety"),
+    ("Microsoft.Ink.Handwriting", "Ink Handwriting"),
+    ("MicrosoftCorporationII.QuickAssist", "Quick Assist"),
+    ("Microsoft.XboxIdentityProvider", "Xbox Live")
 )
 
 $OptionalAppx = (
-    ("Microsoft.WindowsCamera", "Camera"),
-    ("Microsoft.WindowsCalculator", "Calculator"),
-    ("Microsoft.Windows.Photos", "Photos"),
-    ("Microsoft.ScreenSketch", "Snip & Sketch"),
-    ("Microsoft.MicrosoftStickyNotes", "Sticky Notes"),
-    ("Microsoft.XboxApp", "Xbox")
+    ("Microsoft.GamingApp", "Xbox"),
+    ("SAMSUNGELECTRONICSCO.LTD.SamsungSettings1.1", "Samsung Settings"),
+    ("SAMSUNGELECTRONICSCO.LTD.SamsungSecurity", "Samsung Security"),
+    ("SAMSUNGELECTRONICSCO.LTD.SamsungCloudBluetoothSync", "Samsung Bluetooth Sync")
 )
+
+$currentUserSid = ([Security.Principal.WindowsIdentity]::GetCurrent()).User.Value
+
+# Removes for every existing user profile and deprovisions so the package
+# doesn't get reinstalled for new users or linger in Settings > Apps >
+# Installed apps. Also explicitly targets the current interactive user by
+# SID: Remove-AppxPackage/-AllUsers is known to behave unreliably for the
+# current user's own per-user package registration when run from an
+# elevated (Administrator) session, which this script requires - it can
+# silently no-op instead of actually removing the package.
+function Remove-BloatApp {
+    param([string]$Pattern)
+
+    $removed = $false
+
+    Get-AppxPackage -User $currentUserSid $Pattern -ErrorAction SilentlyContinue |
+        ForEach-Object {
+            $_ | Remove-AppxPackage -User $currentUserSid -ErrorAction SilentlyContinue
+            $removed = $true
+        }
+
+    Get-AppxPackage -AllUsers $Pattern -ErrorAction SilentlyContinue |
+        ForEach-Object {
+            $_ | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+            $removed = $true
+        }
+
+    Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue |
+        Where-Object { $_.DisplayName -like $Pattern } |
+        Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue | Out-Null
+
+    # Confirm it's actually gone rather than silently claiming success
+    if ($removed -and (Get-AppxPackage -AllUsers $Pattern -ErrorAction SilentlyContinue)) {
+        Write-Host "  WARNING: $Pattern still present after removal attempt - may need Settings > Apps > Installed apps"
+        return $false
+    }
+    return $true
+}
 
 
 Write-Host "The following apps have been uninstalled:"
@@ -51,29 +103,59 @@ Write-Host "The following apps have been uninstalled:"
 
 # Uninstall from Remove List
 foreach ($app in $RemoveAppx) {
-    $app_wildcards = "*" + $app[0] + "*"
-    Get-AppxPackage $app_wildcards | Remove-AppxPackage
+    Remove-BloatApp ("*" + $app[0] + "*") | Out-Null
     Write-Host $app[1]
 }
 
+# Copilot's taskbar button/feature can persist even after the app package is
+# gone; this is the documented policy to fully turn it off.
+# https://www.thewindowsclub.com/how-to-disable-windows-copilot-in-windows
+New-Item -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot" -Force | Out-Null
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot" -Name "TurnOffWindowsCopilot" -Value 1 -Type DWord
+New-Item -Path "HKCU:\Software\Policies\Microsoft\Windows\WindowsCopilot" -Force | Out-Null
+Set-ItemProperty -Path "HKCU:\Software\Policies\Microsoft\Windows\WindowsCopilot" -Name "TurnOffWindowsCopilot" -Value 1 -Type DWord
+Write-Host "Copilot policy disabled (sign out or restart to fully apply)"
 
-# Uninstall from Optional List, after asking
+
+# Uninstall from Optional List, after asking (unless -All/-a was passed)
 foreach ($app in $OptionalAppx) {
-    $confirmation = Read-Host "Would you like to uninstall" $app[1] "? (y/n)"
-    if ($confirmation -eq 'y' -or $confirmation -eq 'Y') {
-        $app_wildcards = "*" + $app[0] + "*"
-        Get-AppxPackage $app_wildcards | Remove-AppxPackage
+    $confirmed = $All
+    if (-not $confirmed) {
+        $confirmation = Read-Host "Would you like to uninstall" $app[1] "? (y/n)"
+        $confirmed = ($confirmation -eq 'y' -or $confirmation -eq 'Y')
+    }
+    if ($confirmed) {
+        Remove-BloatApp ("*" + $app[0] + "*") | Out-Null
         Write-Host $app[1]
     }
 }
 
 
 # OneDrive
-$onedriveConfirmation = Read-Host "Would you like to uninstall OneDrive? (y/n)"
-if ($onedriveConfirmation -eq 'y') {
-    Get-Process onedrive | Stop-Process -Force
-    Start-Process "$env:windir\SysWOW64\OneDriveSetup.exe /uninstall"
-    Write-Host "OneNote"
+$onedriveConfirmed = $All
+if (-not $onedriveConfirmed) {
+    $onedriveConfirmation = Read-Host "Would you like to uninstall OneDrive? (y/n)"
+    $onedriveConfirmed = ($onedriveConfirmation -eq 'y' -or $onedriveConfirmation -eq 'Y')
+}
+if ($onedriveConfirmed) {
+    Get-Process onedrive -ErrorAction SilentlyContinue | Stop-Process -Force
+
+    # OneDriveSetup.exe's location depends on which bitness got installed:
+    # 64-bit OneDrive lives under System32, 32-bit under SysWOW64.
+    $oneDriveSetupCandidates = @(
+        "$env:windir\System32\OneDriveSetup.exe",
+        "$env:windir\SysWOW64\OneDriveSetup.exe"
+    )
+    $oneDriveSetup = $oneDriveSetupCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+
+    if ($oneDriveSetup) {
+        Start-Process -FilePath $oneDriveSetup -ArgumentList "/uninstall"
+        Write-Host "OneDrive"
+    } else {
+        Write-Host "OneDriveSetup.exe not found under System32 or SysWOW64; skipping."
+    }
 }
 
-Read-Host "Press enter to exit"
+if (-not $All) {
+    Read-Host "Press enter to exit"
+}
