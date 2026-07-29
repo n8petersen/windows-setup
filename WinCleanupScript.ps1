@@ -108,8 +108,12 @@ foreach ($app in $OptionalAppx) {
 
 
 # OneDrive
-$onedriveConfirmation = Read-Host "Would you like to uninstall OneDrive? (y/n)"
-if ($onedriveConfirmation -eq 'y' -or $onedriveConfirmation -eq 'Y') {
+$onedriveConfirmed = $All
+if (-not $onedriveConfirmed) {
+    $onedriveConfirmation = Read-Host "Would you like to uninstall OneDrive? (y/n)"
+    $onedriveConfirmed = ($onedriveConfirmation -eq 'y' -or $onedriveConfirmation -eq 'Y')
+}
+if ($onedriveConfirmed) {
     Get-Process onedrive -ErrorAction SilentlyContinue | Stop-Process -Force
 
     # OneDriveSetup.exe's location depends on which bitness got installed:
