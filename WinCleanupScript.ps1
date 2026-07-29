@@ -131,5 +131,3 @@ if ($onedriveConfirmed) {
         Write-Host "OneDriveSetup.exe not found under System32 or SysWOW64; skipping."
     }
 }
-
-Read-Host "Press enter to exit"
