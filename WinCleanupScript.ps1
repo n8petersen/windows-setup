@@ -85,8 +85,21 @@ foreach ($app in $OptionalAppx) {
 $onedriveConfirmation = Read-Host "Would you like to uninstall OneDrive? (y/n)"
 if ($onedriveConfirmation -eq 'y' -or $onedriveConfirmation -eq 'Y') {
     Get-Process onedrive -ErrorAction SilentlyContinue | Stop-Process -Force
-    Start-Process -FilePath "$env:windir\SysWOW64\OneDriveSetup.exe" -ArgumentList "/uninstall"
-    Write-Host "OneDrive"
+
+    # OneDriveSetup.exe's location depends on which bitness got installed:
+    # 64-bit OneDrive lives under System32, 32-bit under SysWOW64.
+    $oneDriveSetupCandidates = @(
+        "$env:windir\System32\OneDriveSetup.exe",
+        "$env:windir\SysWOW64\OneDriveSetup.exe"
+    )
+    $oneDriveSetup = $oneDriveSetupCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+
+    if ($oneDriveSetup) {
+        Start-Process -FilePath $oneDriveSetup -ArgumentList "/uninstall"
+        Write-Host "OneDrive"
+    } else {
+        Write-Host "OneDriveSetup.exe not found under System32 or SysWOW64; skipping."
+    }
 }
 
 Read-Host "Press enter to exit"
