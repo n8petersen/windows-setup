@@ -61,16 +61,42 @@ $OptionalAppx = (
     ("SAMSUNGELECTRONICSCO.LTD.SamsungCloudBluetoothSync", "Samsung Bluetooth Sync")
 )
 
+$currentUserSid = ([Security.Principal.WindowsIdentity]::GetCurrent()).User.Value
+
 # Removes for every existing user profile and deprovisions so the package
 # doesn't get reinstalled for new users or linger in Settings > Apps >
-# Installed apps - Get-AppxPackage without -AllUsers only touches the
-# current user's registration, which Settings' app list doesn't solely key off.
+# Installed apps. Also explicitly targets the current interactive user by
+# SID: Remove-AppxPackage/-AllUsers is known to behave unreliably for the
+# current user's own per-user package registration when run from an
+# elevated (Administrator) session, which this script requires - it can
+# silently no-op instead of actually removing the package.
 function Remove-BloatApp {
     param([string]$Pattern)
-    Get-AppxPackage -AllUsers $Pattern -ErrorAction SilentlyContinue | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+
+    $removed = $false
+
+    Get-AppxPackage -User $currentUserSid $Pattern -ErrorAction SilentlyContinue |
+        ForEach-Object {
+            $_ | Remove-AppxPackage -User $currentUserSid -ErrorAction SilentlyContinue
+            $removed = $true
+        }
+
+    Get-AppxPackage -AllUsers $Pattern -ErrorAction SilentlyContinue |
+        ForEach-Object {
+            $_ | Remove-AppxPackage -AllUsers -ErrorAction SilentlyContinue
+            $removed = $true
+        }
+
     Get-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue |
         Where-Object { $_.DisplayName -like $Pattern } |
         Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue | Out-Null
+
+    # Confirm it's actually gone rather than silently claiming success
+    if ($removed -and (Get-AppxPackage -AllUsers $Pattern -ErrorAction SilentlyContinue)) {
+        Write-Host "  WARNING: $Pattern still present after removal attempt - may need Settings > Apps > Installed apps"
+        return $false
+    }
+    return $true
 }
 
 
@@ -79,7 +105,7 @@ Write-Host "The following apps have been uninstalled:"
 
 # Uninstall from Remove List
 foreach ($app in $RemoveAppx) {
-    Remove-BloatApp ("*" + $app[0] + "*")
+    Remove-BloatApp ("*" + $app[0] + "*") | Out-Null
     Write-Host $app[1]
 }
 
@@ -101,7 +127,7 @@ foreach ($app in $OptionalAppx) {
         $confirmed = ($confirmation -eq 'y' -or $confirmation -eq 'Y')
     }
     if ($confirmed) {
-        Remove-BloatApp ("*" + $app[0] + "*")
+        Remove-BloatApp ("*" + $app[0] + "*") | Out-Null
         Write-Host $app[1]
     }
 }
