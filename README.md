@@ -13,6 +13,8 @@ This script installs a preconfigured list of applications through [winget config
 
 You can also generate a resource block for anything already installed with `winget configure export --package-id <id> -o configuration/programs.dsc.yaml` and copy the new block in (it only works for packages already installed on the machine you run it from).
 
+If Nilesoft Shell gets installed, the script also overwrites its default `taskbar.nss` and `theme.nss` imports with fixed versions from `configuration/nilesoft/` - the stock ones have two bugs on recent Windows builds: the taskbar right-click menu's dynamic title tokens fail to resolve, and `dark = sys.dark` doesn't correctly follow the system theme. Restart Explorer (or sign out/in) afterward for the fix to apply.
+
 ---
 # Windows Cleanup Script
 *Note: This script should be run from an elevated (administrator) Powershell session.*  

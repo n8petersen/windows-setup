@@ -19,6 +19,19 @@ Write-Host "--== Installing Programs ==--"
 Write-Host "--------------------------"
 winget configure -f ./configuration/programs.dsc.yaml --accept-configuration-agreements --disable-interactivity
 
+# Nilesoft Shell's default imports have two bugs on recent Windows builds:
+# taskbar.nss's dynamic title.windows/title.task_manager/etc. tokens fail to
+# resolve (breaking the taskbar right-click menu), and theme.nss's
+# `dark = sys.dark` doesn't correctly pick up the system theme. Overwrite
+# both with fixed versions if Nilesoft Shell is installed.
+$nilesoftImports = "C:\Program Files\Nilesoft Shell\imports"
+if (Test-Path $nilesoftImports) {
+    Write-Host "--== Applying Nilesoft Shell config fixes ==--"
+    Copy-Item -Path "./configuration/nilesoft/taskbar.nss" -Destination "$nilesoftImports\taskbar.nss" -Force
+    Copy-Item -Path "./configuration/nilesoft/theme.nss" -Destination "$nilesoftImports\theme.nss" -Force
+    Write-Host "Applied. Restart Explorer (or sign out/in) for the change to take effect."
+}
+
 # Apply the games configuration, if desired
 $installGames = Read-Host "Would you like to install Game Applications? (y/n)"
 if ($installGames -eq 'y' -Or $installGames -eq 'Y') {
