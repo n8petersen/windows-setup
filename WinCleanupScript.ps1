@@ -30,10 +30,19 @@ $RemoveAppx = (
     ("Microsoft.Getstarted", "Tips"),
     ("Microsoft.WindowsSoundRecorder", "Voice Recorder"),
     ("Clipchamp.Clipchamp", "Clipchamp"),
-    ("MicrosoftTeams", "Teams"),
+    ("MicrosoftTeams", "Teams (classic)"),
+    ("MSTeams", "Teams"),
     ("Microsoft.Todos", "Todo"),
     ("Microsoft.BingNews", "News"),
-    ("Microsoft.BingWeather", "Weather")
+    ("Microsoft.BingWeather", "Weather"),
+    ("Microsoft.Copilot", "Copilot"),
+    ("Microsoft.BingSearch", "Bing Search"),
+    ("Microsoft.OutlookForWindows", "Outlook (new)"),
+    ("Microsoft.PowerAutomateDesktop", "Power Automate"),
+    ("MicrosoftCorporationII.MicrosoftFamily", "Family Safety"),
+    ("Microsoft.Ink.Handwriting", "Ink Handwriting"),
+    ("MicrosoftCorporationII.QuickAssist", "Quick Assist"),
+    ("Microsoft.StartExperiencesApp", "Start Experiences App")
 )
 
 $OptionalAppx = (
@@ -42,7 +51,11 @@ $OptionalAppx = (
     ("Microsoft.Windows.Photos", "Photos"),
     ("Microsoft.ScreenSketch", "Snip & Sketch"),
     ("Microsoft.MicrosoftStickyNotes", "Sticky Notes"),
-    ("Microsoft.XboxApp", "Xbox")
+    ("Microsoft.GamingApp", "Xbox"),
+    ("Microsoft.XboxIdentityProvider", "Xbox Live"),
+    ("SAMSUNGELECTRONICSCO.LTD.SamsungSettings1.1", "Samsung Settings"),
+    ("SAMSUNGELECTRONICSCO.LTD.SamsungSecurity", "Samsung Security"),
+    ("SAMSUNGELECTRONICSCO.LTD.SamsungCloudBluetoothSync", "Samsung Bluetooth Sync")
 )
 
 
@@ -69,11 +82,8 @@ foreach ($app in $OptionalAppx) {
 
 
 # OneDrive
-$onedriveConfirmation = Read-Host "Would you like to uninstall OneDrive? (y/n)"
-if ($onedriveConfirmation -eq 'y') {
-    Get-Process onedrive | Stop-Process -Force
-    Start-Process "$env:windir\SysWOW64\OneDriveSetup.exe /uninstall"
-    Write-Host "OneNote"
-}
+Get-Process onedrive -ErrorAction SilentlyContinue | Stop-Process -Force
+Start-Process -FilePath "$env:windir\SysWOW64\OneDriveSetup.exe" -ArgumentList "/uninstall"
+Write-Host "OneDrive"
 
 Read-Host "Press enter to exit"
