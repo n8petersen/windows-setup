@@ -1,0 +1,399 @@
+# Generated with `winget configure export`, edited by hand for entries that
+# weren't installed on the export machine (winget configure export requires a
+# package to already be installed to export its resource block).
+#
+# Packages skipped entirely (no winget equivalent, or already provided by
+# Windows itself):
+#   coretemp            -> ALCPU.CoreTemp
+#   cura-new             no winget package
+#   curl                 built into Windows 10 1803+ and Windows 11
+#   firefox              -> Mozilla.Firefox
+#   geforce-experience   only on Microsoft Store: winget install --id XP8CLZL93F5Z4P -s msstore
+#   javaruntime/jre8     -> Oracle.JavaRuntimeEnvironment
+#   modernflyouts        -> ModernFlyouts.ModernFlyouts
+#   mremoteng            -> mRemoteNG.mRemoteNG
+#   obs-studio           -> OBSProject.OBSStudio
+#   occt                 -> OCBase.OCCT.Personal
+#   openjdk               vendor-specific on winget (e.g. EclipseAdoptium.Temurin.21.JDK), pick one
+#   paint.net            -> dotPDN.PaintDotNet
+#   postman              -> Postman.Postman
+#   putty                -> PuTTY.PuTTY
+#   qflipper             -> FlipperDevicesInc.qFlipper
+#   rufus                -> Rufus.Rufus
+#   sharex               -> ShareX.ShareX
+#   steelseries-engine   -> SteelSeries.SteelSeriesEngine
+#   tor-browser          -> TorProject.TorBrowser
+#   wireshark            -> WiresharkFoundation.Wireshark
+#   zoom                 -> Zoom.Zoom
+#   docker-cli/compose    bundled with Docker.DockerDesktop
+#   winget/winget-cli     this is winget itself, already required to run this
+#   wsl2                  handled separately in ApplicationInstall.ps1 via `wsl --install`
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.3
+$schema: https://raw.githubusercontent.com/PowerShell/DSC/main/schemas/2023/08/config/document.json
+metadata:
+  winget:
+    processor:
+      identifier: "dscv3"
+resources:
+- name: winget_Microsoft.PreIndexed.Package
+  type: Microsoft.WinGet/Source
+  metadata:
+    description: "Configure winget_Microsoft.PreIndexed.Package"
+    winget:
+      securityContext: "elevated"
+  properties:
+    type: "Microsoft.PreIndexed.Package"
+    trustLevel: "trusted"
+    argument: "https://cdn.winget.microsoft.com/cache"
+    name: "winget"
+- name: winget_7zip.7zip
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install 7zip.7zip"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "7zip.7zip"
+    source: "winget"
+- name: winget_Discord.Discord
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Discord.Discord"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Discord.Discord"
+    source: "winget"
+- name: winget_Docker.DockerDesktop
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Docker.DockerDesktop"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Docker.DockerDesktop"
+    source: "winget"
+- name: winget_Flow-Launcher.Flow-Launcher
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Flow-Launcher.Flow-Launcher"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Flow-Launcher.Flow-Launcher"
+    source: "winget"
+- name: winget_Git.Git
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Git.Git"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Git.Git"
+    source: "winget"
+- name: winget_GoLang.Go
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install GoLang.Go"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "GoLang.Go"
+    source: "winget"
+- name: winget_Google.Chrome
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Google.Chrome"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Google.Chrome"
+    source: "winget"
+- name: winget_Google.GoogleDrive
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Google.GoogleDrive"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Google.GoogleDrive"
+    source: "winget"
+- name: winget_Greenshot.Greenshot
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Greenshot.Greenshot"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Greenshot.Greenshot"
+    source: "winget"
+- name: winget_gerardog.gsudo
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install gerardog.gsudo"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "gerardog.gsudo"
+    source: "winget"
+- name: winget_Microsoft.Edge
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Microsoft.Edge"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Microsoft.Edge"
+    source: "winget"
+- name: winget_Mobatek.MobaXterm
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Mobatek.MobaXterm"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Mobatek.MobaXterm"
+    source: "winget"
+- name: winget_Neovim.Neovim
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Neovim.Neovim"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Neovim.Neovim"
+    source: "winget"
+- name: winget_Nilesoft.Shell
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Nilesoft.Shell"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Nilesoft.Shell"
+    source: "winget"
+- name: winget_OpenJS.NodeJS
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install OpenJS.NodeJS"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "OpenJS.NodeJS"
+    source: "winget"
+- name: winget_Notepad++.Notepad++
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Notepad++.Notepad++"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Notepad++.Notepad++"
+    source: "winget"
+- name: winget_CoreyButler.NVMforWindows
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install CoreyButler.NVMforWindows"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "CoreyButler.NVMforWindows"
+    source: "winget"
+- name: winget_Obsidian.Obsidian
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Obsidian.Obsidian"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Obsidian.Obsidian"
+    source: "winget"
+- name: winget_Microsoft.PowerShell
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Microsoft.PowerShell"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Microsoft.PowerShell"
+    source: "winget"
+- name: winget_Microsoft.PowerToys
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Microsoft.PowerToys"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Microsoft.PowerToys"
+    source: "winget"
+- name: winget_Python.Python.3.14
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Python.Python.3.14"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Python.Python.3.14"
+    source: "winget"
+- name: winget_Python.Python.3.12
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Python.Python.3.12"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Python.Python.3.12"
+    source: "winget"
+- name: winget_qBittorrent.qBittorrent
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install qBittorrent.qBittorrent"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "qBittorrent.qBittorrent"
+    source: "winget"
+- name: winget_RevoUninstaller.RevoUninstaller
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install RevoUninstaller.RevoUninstaller"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "RevoUninstaller.RevoUninstaller"
+    source: "winget"
+- name: winget_Spotify.Spotify
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Spotify.Spotify"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Spotify.Spotify"
+    source: "winget"
+- name: winget_Starship.Starship
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Starship.Starship"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Starship.Starship"
+    source: "winget"
+- name: winget_Valve.Steam
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Valve.Steam"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Valve.Steam"
+    source: "winget"
+- name: winget_Microsoft.Sysinternals.Suite
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Microsoft.Sysinternals.Suite"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Microsoft.Sysinternals.Suite"
+    source: "winget"
+- name: winget_Tailscale.Tailscale
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Tailscale.Tailscale"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Tailscale.Tailscale"
+    source: "winget"
+- name: winget_Vivaldi.Vivaldi
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Vivaldi.Vivaldi"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Vivaldi.Vivaldi"
+    source: "winget"
+- name: winget_VideoLAN.VLC
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install VideoLAN.VLC"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "VideoLAN.VLC"
+    source: "winget"
+- name: winget_Microsoft.VisualStudioCode
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Microsoft.VisualStudioCode"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Microsoft.VisualStudioCode"
+    source: "winget"
+- name: winget_WinSCP.WinSCP
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install WinSCP.WinSCP"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "WinSCP.WinSCP"
+    source: "winget"
+- name: winget_AntibodySoftware.WizTree
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install AntibodySoftware.WizTree"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "AntibodySoftware.WizTree"
+    source: "winget"
+- name: winget_Anthropic.ClaudeCode
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Anthropic.ClaudeCode"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Anthropic.ClaudeCode"
+    source: "winget"
+- name: winget_Hashicorp.Terraform
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Hashicorp.Terraform"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Hashicorp.Terraform"
+    source: "winget"
+- name: winget_Kubernetes.kubectl
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Kubernetes.kubectl"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Kubernetes.kubectl"
+    source: "winget"
+- name: winget_ahmetb.kubectx
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install ahmetb.kubectx"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "ahmetb.kubectx"
+    source: "winget"
+- name: winget_Derailed.k9s
+  type: Microsoft.WinGet/Package
+  metadata:
+    description: "Install Derailed.k9s"
+  dependsOn:
+  - winget_Microsoft.PreIndexed.Package
+  properties:
+    id: "Derailed.k9s"
+    source: "winget"

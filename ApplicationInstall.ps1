@@ -7,56 +7,38 @@ if (!$isAdmin) {
     Exit
 }
 
-# Install Chocolatey
-$testchoco = Get-Command -Name choco.exe -ErrorAction SilentlyContinue
-if (-not($testchoco)) {
-    Write-Output "Seems Chocolatey is not installed, installing now."
-    Write-Host "----------------------------------------------------"
-    Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-}
-else {
-    Write-Output "Chocolatey is already installed, skipping Chocolatey Install."
-    Write-Host "----------------------------------------------------------------------------------"
+# winget ships with Windows 10 1809+ and Windows 11 via App Installer
+$testwinget = Get-Command -Name winget.exe -ErrorAction SilentlyContinue
+if (-not($testwinget)) {
+    Write-Host "winget was not found. Install/update App Installer from the Microsoft Store, then re-run this script."
+    Exit
 }
 
-# Parse programs.txt into array, and install
+# Apply the programs configuration
 Write-Host "--== Installing Programs ==--"
 Write-Host "--------------------------"
-[string[]]$appArray = Get-Content -Path './InstallPrograms.txt'
-foreach ($app in $appArray) {
-    if ($app -notmatch '((#|\/\/).*)' -and $app -ne "") {
-        Write-Host "Installing $app"
-        choco upgrade $app -y
-    }
-}
+winget configure -f ./configuration/programs.dsc.yaml --accept-configuration-agreements --disable-interactivity
 
-# Parse games.txt into array, and install, if desired
+# Apply the games configuration, if desired
 $installGames = Read-Host "Would you like to install Game Applications? (y/n)"
 if ($installGames -eq 'y' -Or $installGames -eq 'Y') {
     Write-Host "--== Installing Games ==--"
     Write-Host "--------------------------"
-    [string[]]$gamesArray = Get-Content -Path './InstallGames.txt'
-    foreach ($game in $gamesArray) {
-        if ($game -notmatch '((#|\/\/).*)' -and $game -ne "") {
-            Write-Host "Installing $game"
-            choco upgrade $game -y
-        }
-    }
+    winget configure -f ./configuration/games.dsc.yaml --accept-configuration-agreements --disable-interactivity
 }
 
-# Update any existing choco packages
+# Update any existing winget packages
 Write-Host "--== Updating Packages ==--"
 Write-Host "---------------------------"
-choco upgrade all -y
+winget upgrade --all --accept-package-agreements --accept-source-agreements
 
 
-# Install WSL 
+# Install WSL
 Write-Host "--== Installing WSL Distros ==--"
 Write-Host "---------------------------"
-wsl --install -d ubuntu-22.04 -n 
+wsl --install -d ubuntu-22.04 -n
 wsl --install -d kali-linux -n
 
-    
+
 Write-Host "---------------------------------"
 Write-Host "Finished installing and updating applications."
-

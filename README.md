@@ -9,7 +9,9 @@ Hopefully in the nearby future, I will get this script digitally signed, however
 ---
 # Application Install Script
 *Note: This script should be run from an elevated (administrator) Powershell session.*  
-This script first installs Chocolatey, and then installs a preconfigured list of applications through Chocolatey. It uses the list from programs.txt, so you can remove or add your own programs from my list, they just have to be the [package name from chocolatey](https://community.chocolatey.org/packages).
+This script installs a preconfigured list of applications through [winget configure](https://learn.microsoft.com/en-us/windows/package-manager/configuration/) (ships with Windows 10 1809+/11 via App Installer). It applies `configuration/programs.dsc.yaml`, and optionally `configuration/games.dsc.yaml`, each a declarative list of `Microsoft.WinGet/Package` resources. To add or remove a program, add or remove a resource block in the relevant `.dsc.yaml` file; find a package ID with `winget search <name>`.
+
+You can also generate a resource block for anything already installed with `winget configure export --package-id <id> -o configuration/programs.dsc.yaml` and copy the new block in (it only works for packages already installed on the machine you run it from).
 
 ---
 # Windows Cleanup Script
