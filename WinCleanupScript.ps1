@@ -82,8 +82,11 @@ foreach ($app in $OptionalAppx) {
 
 
 # OneDrive
-Get-Process onedrive -ErrorAction SilentlyContinue | Stop-Process -Force
-Start-Process -FilePath "$env:windir\SysWOW64\OneDriveSetup.exe" -ArgumentList "/uninstall"
-Write-Host "OneDrive"
+$onedriveConfirmation = Read-Host "Would you like to uninstall OneDrive? (y/n)"
+if ($onedriveConfirmation -eq 'y' -or $onedriveConfirmation -eq 'Y') {
+    Get-Process onedrive -ErrorAction SilentlyContinue | Stop-Process -Force
+    Start-Process -FilePath "$env:windir\SysWOW64\OneDriveSetup.exe" -ArgumentList "/uninstall"
+    Write-Host "OneDrive"
+}
 
 Read-Host "Press enter to exit"
