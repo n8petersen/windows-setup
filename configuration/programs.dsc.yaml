@@ -172,15 +172,6 @@ resources:
   properties:
     id: "Nilesoft.Shell"
     source: "winget"
-- name: winget_OpenJS.NodeJS
-  type: Microsoft.WinGet/Package
-  metadata:
-    description: "Install OpenJS.NodeJS"
-  dependsOn:
-  - winget_Microsoft.PreIndexed.Package
-  properties:
-    id: "OpenJS.NodeJS"
-    source: "winget"
 - name: winget_Notepad++.Notepad++
   type: Microsoft.WinGet/Package
   metadata:
